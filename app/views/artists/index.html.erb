@@ -1,0 +1,11 @@
+<h1>Artists</h1>
+
+<p>
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %> <br />
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_artist_path %>
+</p>
+<p>
+    <% @artists.each do |artist| %>
+        <%= link_to artist.name, artist_path(artist) %>
+    <% end %>
+</p>

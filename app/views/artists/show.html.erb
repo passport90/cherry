@@ -1,0 +1,12 @@
+<h1>Artist</h1>
+
+<h2><%= @artist.name %></h2>
+
+<p>
+  <span class="symbol">✏️</span>
+  <%= link_to "Update", edit_artist_path(@artist) %>
+</p>
+<p>
+  <span class="symbol">🧑‍🎤</span> <%= link_to 'Artists', artists_path %> <br />
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
+</p>
