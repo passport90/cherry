@@ -1,3 +1,35 @@
 // Place all the styles related to the Songs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+img.artwork {
+    display: block;
+    max-width: 400px;
+    height: auto;
+}
+
+input.rating {
+    font-family: monospace;
+    width: 4ch;
+}
+
+span.rating {
+    padding: 0.25em;
+    text-align: center;
+    color: #fff;
+    vertical-align: middle;
+    font-weight: bold;
+    border-radius: 4px;
+}
+.rating.gray {
+    background-color: #ccc;
+}
+.rating.red {
+    background-color: #f00;
+}
+.rating.yellow {
+    background-color: #fc3;
+}
+.rating.green {
+    background-color: #6c3;
+}

@@ -41,6 +41,7 @@ class SongsController < ApplicationController
 
 private
   def song_params
-    params.require(:song).permit(:title, :artist_id)
+    params.require(:song)
+          .permit(:title, :is_liked, :stream_link, :video_link, :rating)
   end
 end

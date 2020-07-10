@@ -30,3 +30,10 @@ p.home {
 .symbol {
     font-family: sans-serif;
 }
+
+textarea.url {
+    font-family: monospace;
+    width: 50ch;
+    height: 2em;
+    resize: none;
+}

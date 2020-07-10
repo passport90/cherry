@@ -1,9 +1,32 @@
+<p>
+  <%= image_tag("/images/songs/#{@song.id}.jpg", class: 'artwork') %>
+</p>
 <h1><%= "\"#{@song.title}\"" %></h1>
 
 <p>
-  Artists: <br />
+  <% if @song.artists.size > 1 %>
+    Artists: <br />
+  <% end %>
   <% @song.artists.each do |artist| %>
     <%= link_to artist.name, artist_path(artist) %>
+  <% end %>
+</p>
+
+
+<p>
+  <%= tag.span @song.display_rating, class: "rating #{@song.rating_color}" %>
+  <% if @song.is_liked %><span class="symbol">❤️</span><% end %>
+</p>
+
+<p>
+  <% if @song.video_link.present? %>
+    <span class="symbol">🎞️️</span>
+    <%= link_to 'Video', @song.video_link, rel: 'external', target: '_blank' %>
+    <br />
+  <% end %>
+  <% if @song.stream_link.present? %>
+    <span class="symbol">🎧</span>
+    <%= link_to 'Stream', @song.stream_link, rel: 'external', target: '_blank' %>
   <% end %>
 </p>
 
@@ -12,6 +35,7 @@
   <%= link_to "Update", edit_song_path(@song) %>
 </p>
 <p>
-  <span class="symbol">‍🎵</span> <%= link_to "Songs", songs_path %><br />
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_song_path %> <br />
+  <span class="symbol">‍🎵</span> <%= link_to "Songs", songs_path %> <br />
   <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
 </p>

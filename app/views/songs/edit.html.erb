@@ -14,6 +14,22 @@
       )
     %>
   </p>
+  <p>
+    <%= f.check_box :is_liked %>
+    <%= f.label :is_liked, "Liked" %>
+  </p>
+  <p>
+    <%= f.label :video_link, 'Video Link' %> <br />
+    <%= f.text_area :video_link, class: 'url' %>
+  </p>
+  <p>
+    <%= f.label :stream_link, 'Stream Link' %> <br />
+    <%= f.text_area :stream_link, class: 'url' %>
+  </p>
+  <p>
+    <%= f.label :rating, 'Rating' %> <br />
+    <%= f.text_field :rating, class: 'rating' %>
+  </p>
   <p><%= f.submit 'Update' %></p>
 <% end %>
 
