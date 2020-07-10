@@ -1,4 +1,9 @@
-<h1>Entries</h1>
+<h1>Chart</h1>
+<h2>Week <%= @week %>, <%= @year %></h2>
+<p>
+  <%= @week_start.strftime('%-d %B %Y') %> -
+  <%= @week_end.strftime('%-d %B %Y') %><br />
+</p>
 <p>
   <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
   <br />
@@ -18,15 +23,12 @@
   %>
   <span class="symbol">➡️</span><br />
 </p>
-<p>
-  <%= @week_start.strftime('Week %V, %G') %><br />
-  <%= @week_start.strftime('%-d %B %Y') %> -
-  <%= @week_end.strftime('%-d %B %Y') %>
-</p>
 <table>
   <thead>
     <tr>
-      <th>#</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+      <th class="position">#</th>
       <th>Title</th>
       <th>Artist</th>
       <th>Rating</th>
@@ -35,6 +37,8 @@
   <tbody>
     <% @entries.each do |entry| %>
       <tr>
+        <td class="state"><span class="symbol"><%= entry.state %></span></td>
+        <td class="difference"><%= entry.difference_display %></td>
         <td class="position"><%= entry.position %></td>
         <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
         <td><%= entry.song.display_artist %></td>
@@ -51,10 +55,37 @@
     <% end %>
   </tbody>
 </table>
-<p>
-  <span class="symbol">✏️</span>
-  <%= link_to "Edit", edit_entries_path(week: @week, year: @year) %>
-</p>
+<% if @dropped_entries.exists? %>
+  <h5>Dropped Previous Entries</h5>
+  <table>
+    <thead>
+      <tr>
+        <th class="dropped_position">#</th>
+        <th>Title</th>
+        <th>Artist</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @dropped_entries.each do |entry| %>
+        <tr>
+          <td class="dropped_position"><%= entry.position %></td>
+          <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
+          <td><%= entry.song.display_artist %></td>
+          <td>
+            <%=
+              tag.span(
+                entry.song.display_rating,
+                class: "rating #{entry.song.rating_color}"
+              )
+            %>
+            <% if entry.song.is_liked %><span class="symbol">❤️</span><% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 <p>
   <span class="symbol">🗓️</span>
   <%= link_to "This Year", weeks_path(year: @year) %><br />

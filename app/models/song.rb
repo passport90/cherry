@@ -1,4 +1,5 @@
 class Song < ApplicationRecord
+  extend Memoist
   has_and_belongs_to_many :artists
   has_many :entries
   default_scope { includes(:artists).order(:title) }
@@ -27,4 +28,10 @@ class Song < ApplicationRecord
       'green'
     end
   end
+
+  def peak_entry
+    entries.unscoped.where(song: self).order(:position).order(:year)
+            .order(:week).first
+  end
+  memoize :peak_entry
 end

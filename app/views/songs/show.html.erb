@@ -1,5 +1,5 @@
 <p>
-  <%= image_tag("/images/songs/#{@song.id}.jpg", class: 'artwork') %>
+  <%= image_tag("/images/songs/#{@song.id}.jpg", class: 'headline') %>
 </p>
 <h1><%= "\"#{@song.title}\"" %></h1>
 
@@ -15,8 +15,35 @@
 
 <p>
   <%= tag.span @song.display_rating, class: "rating #{@song.rating_color}" %>
-  <% if @song.is_liked %><span class="symbol">❤️</span><% end %>
+<% if @song.is_liked %><span class="symbol">❤️</span><% end %>
 </p>
+
+<% if @entrance.present? %>
+<p>
+  <span class="symbol">⛰️</span> 
+  #<%= @peak.position %> in 
+  <%= 
+    link_to(
+      "Week #{@peak.week}, #{@peak.year}",
+      entries_index_path(year: @peak.year, week: @peak.week)
+    )
+  %>
+  <br />
+  <span class="symbol">🏃</span>
+  <%= 
+    link_to(
+      "Week #{@entrance.week}, #{@entrance.year}",
+      entries_index_path(year: @entrance.year, week: @entrance.week)
+    )
+  %> to 
+  <%= 
+    link_to(
+      "Week #{@exit.week}, #{@exit.year}",
+      entries_index_path(year: @exit.year, week: @exit.week)
+    )
+  %>
+</p>
+<% end %>
 
 <p>
   <% if @song.video_link.present? %>

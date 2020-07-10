@@ -24,7 +24,7 @@ class EntriesController < ApplicationController
       end
     end
 
-    redirect_to entries_path(year: year, week: week)
+    redirect_to entries_index_path(year: year, week: week)
   end
 
   def edit
@@ -39,13 +39,20 @@ class EntriesController < ApplicationController
     @year = params[:year].to_i
     @week = params[:week].to_i
 
-    @entries = Entry.where(year: @year, week: @week).all
+    @entries = Entry.where(year: @year, week: @week)
     raise ActionController::RoutingError if @entries.size < 10
 
     @week_start = Date.strptime(@year.to_s + @week.to_s.rjust(2, '0'), '%G%V')
     @prev_week = @week_start - 1.week
     @next_week = @week_start + 1.week
     @week_end = @next_week - 1.day
+
+
+    @dropped_entries = (
+      Entry.unscoped.where(
+        year: @prev_week.cwyear, week: @prev_week.cweek,
+      ).where.not(song_id: @entries.pluck(:song_id))
+    )
   end
 
   def new

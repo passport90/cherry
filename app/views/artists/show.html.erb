@@ -1,5 +1,6 @@
-<h1>Artist</h1>
-
+<p>
+  <%= image_tag("/images/artists/#{@artist.id}.jpg", class: 'headline') %>
+</p>
 <h2><%= @artist.name %></h2>
 
 <% if @artist.songs.present? %>

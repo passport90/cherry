@@ -50,6 +50,12 @@ p.home {
     font-size: 2em;
 }
 
+img.headline {
+    display: block;
+    max-height: 400px;
+    width: auto;
+}
+
 .symbol {
     font-family: sans-serif;
 }

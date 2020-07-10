@@ -24,6 +24,12 @@ class SongsController < ApplicationController
 
   def show
     @song = Song.find(params[:id])
+
+    if @song.entries.exists?
+      @entrance = @song.entries.first
+      @exit = @song.entries.last
+      @peak = @song.peak_entry
+    end
   end
 
   def update

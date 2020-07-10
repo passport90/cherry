@@ -14,3 +14,30 @@ table.entries-form td {
     border: 0;
     padding: 0.2em;
 }
+
+th.position,
+td.position {
+    text-align: right;
+    font-weight: bold;
+    border-left: none;
+}
+
+th.dropped_position,
+td.dropped_position {
+    text-align: right;
+}
+
+
+td.state {
+    border-right: none;
+}
+
+td.difference {
+    border-left: none;
+    border-right: none;
+}
+
+.difference {
+    color: #808080;
+    font-family: monospace;
+}
