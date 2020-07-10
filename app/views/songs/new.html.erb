@@ -7,7 +7,12 @@
   </p>
   <p>
     <%= f.label :artist, 'Artist(s)' %> <br />
-    <%= f.collection_select(:artist_id, Artist.all, :id, :name, {include_hidden: false}, {multiple: true}) %>
+    <%=
+      f.collection_select(
+        :artist_id, Artist.all, :id, :name, {include_hidden: false},
+        {multiple: true}
+      )
+    %>
   </p>
   <p>
     <%= f.check_box :is_liked %>

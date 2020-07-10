@@ -1,0 +1,62 @@
+<h1>Entries</h1>
+<p>
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
+  <br />
+  <span class="symbol">⬅️</span>
+  <%= 
+    link_to(
+      'Prev Week',
+      entries_index_path(week: @prev_week.cweek, year: @prev_week.cwyear)
+    )
+  %>
+  |
+  <%= 
+    link_to(
+      'Next Week',
+      entries_index_path(week: @next_week.cweek, year: @next_week.cwyear)
+    )
+  %>
+  <span class="symbol">➡️</span><br />
+</p>
+<p>
+  <%= @week_start.strftime('Week %V, %G') %><br />
+  <%= @week_start.strftime('%-d %B %Y') %> -
+  <%= @week_end.strftime('%-d %B %Y') %>
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @entries.each do |entry| %>
+      <tr>
+        <td class="position"><%= entry.position %></td>
+        <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
+        <td><%= entry.song.display_artist %></td>
+        <td>
+          <%=
+            tag.span(
+              entry.song.display_rating,
+              class: "rating #{entry.song.rating_color}"
+            )
+          %>
+          <% if entry.song.is_liked %><span class="symbol">❤️</span><% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<p>
+  <span class="symbol">✏️</span>
+  <%= link_to "Edit", edit_entries_path(week: @week, year: @year) %>
+</p>
+<p>
+  <span class="symbol">🗓️</span>
+  <%= link_to "This Year", weeks_path(year: @year) %><br />
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
+</p>

@@ -13,23 +13,9 @@ input.rating {
     width: 4ch;
 }
 
-span.rating {
-    padding: 0.25em;
-    text-align: center;
-    color: #fff;
-    vertical-align: middle;
-    font-weight: bold;
-    border-radius: 4px;
-}
-.rating.gray {
-    background-color: #ccc;
-}
-.rating.red {
-    background-color: #f00;
-}
-.rating.yellow {
-    background-color: #fc3;
-}
-.rating.green {
-    background-color: #6c3;
+textarea.url {
+    font-family: monospace;
+    width: 50ch;
+    height: 2em;
+    resize: none;
 }

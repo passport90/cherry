@@ -1,4 +1,4 @@
 class Entry < ApplicationRecord
   belongs_to :song
-  default_scope { order(:year).order(:week).order(:position) }
+  default_scope { includes(:song).order(:year).order(:week).order(:position) }
 end

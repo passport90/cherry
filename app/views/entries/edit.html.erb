@@ -1,6 +1,10 @@
 <h1>Update Entries of <%= "Week #{@week}, #{@year}" %></h1>
 
-<%= form_with url: update_entries_path(year: @year, week: @week), method: :put do %>
+<%=
+  form_with(
+    url: update_entries_path(year: @year, week: @week), method: :put
+  ) do 
+%>
   <table class="entries-form">
     <tbody>
       <% (1..10).each do |position| %>

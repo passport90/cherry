@@ -41,6 +41,11 @@ class EntriesController < ApplicationController
 
     @entries = Entry.where(year: @year, week: @week).all
     raise ActionController::RoutingError if @entries.size < 10
+
+    @week_start = Date.strptime(@year.to_s + @week.to_s.rjust(2, '0'), '%G%V')
+    @prev_week = @week_start - 1.week
+    @next_week = @week_start + 1.week
+    @week_end = @next_week - 1.day
   end
 
   def new
@@ -53,8 +58,6 @@ class EntriesController < ApplicationController
     if params[:entries][:songs].values.uniq!.present?
       raise ActionController::BadRequest
     end
-
-    puts('test')
 
     ActiveRecord::Base.transaction do
       (1..10).each do |position|

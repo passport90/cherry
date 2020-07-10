@@ -21,21 +21,24 @@
 <p>
   <% if @song.video_link.present? %>
     <span class="symbol">🎞️️</span>
-    <%= link_to 'Video', @song.video_link, rel: 'external', target: '_blank' %>
+    <%=
+      link_to 'Video', @song.video_link, rel: 'external', target: '_blank'
+    %>
     <br />
   <% end %>
   <% if @song.stream_link.present? %>
     <span class="symbol">🎧</span>
-    <%= link_to 'Stream', @song.stream_link, rel: 'external', target: '_blank' %>
+    <%=link_to 'Stream', @song.stream_link, rel: 'external', target: '_blank' %>
   <% end %>
 </p>
 
 <p>
   <span class="symbol">✏️</span>
-  <%= link_to "Update", edit_song_path(@song) %>
+  <%= link_to "Edit", edit_song_path(@song) %>
 </p>
 <p>
-  <span class="symbol">➕</span> <%= link_to 'Create New', new_song_path %> <br />
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_song_path %>
+  <br />
   <span class="symbol">‍🎵</span> <%= link_to "Songs", songs_path %> <br />
   <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
 </p>
