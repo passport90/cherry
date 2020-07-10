@@ -1,14 +1,17 @@
 class SongsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
-      @song = Song.new(song_params)
+      @song = Song.create(song_params)
+      if params[:song][:artist_id].blank?
+        raise ActionController::ParameterMissing
+      end
       @song.artist_ids = params[:song][:artist_id]
-      raise ActionController::ParameterMissing if @song.artist_ids.blank?
-
-      @song.save
-
-      redirect_to song_path(@song)
     end
+    redirect_to song_path(@song)
+  end
+
+  def edit
+    @song = Song.find(params[:id])
   end
 
   def index
@@ -17,11 +20,23 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
-    @artists = Artist.all
   end
 
   def show
     @song = Song.find(params[:id])
+  end
+
+  def update
+    ActiveRecord::Base.transaction do
+      @song = Song.find(params[:id])
+      @song.update(song_params)
+      if params[:song][:artist_id].blank?
+        raise ActionController::ParameterMissing
+      end
+      @song.artist_ids = params[:song][:artist_id]
+    end
+
+    redirect_to song_path(@song)
   end
 
 private

@@ -10,28 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_065848) do
+ActiveRecord::Schema.define(version: 2020_07_10_081506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "artists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "artists_songs", force: :cascade do |t|
-    t.bigint "artist_id"
-    t.bigint "song_id"
+    t.bigint "artist_id", null: false
+    t.bigint "song_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id", "song_id"], name: "index_artists_songs_on_artist_id_and_song_id", unique: true
     t.index ["artist_id"], name: "index_artists_songs_on_artist_id"
     t.index ["song_id"], name: "index_artists_songs_on_song_id"
   end
 
+  create_table "entries", force: :cascade do |t|
+    t.integer "year", null: false
+    t.integer "week", null: false
+    t.integer "position", null: false
+    t.bigint "song_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["song_id"], name: "index_entries_on_song_id"
+    t.index ["year", "week", "position"], name: "index_entries_on_year_and_week_and_position", unique: true
+    t.index ["year", "week", "song_id"], name: "index_entries_on_year_and_week_and_song_id", unique: true
+  end
+
   create_table "songs", force: :cascade do |t|
-    t.string "title"
+    t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,15 @@
+<h1>Entries</h1>
+
+<p>
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %> <br />
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
+</p>
+<p>
+  <% if @years.length > 0 %>
+    <% @years.each do |year| %>
+      <%= link_to year, weeks_path(year: year) %><br />
+    <% end %>
+  <% else %>
+    There are no entries.
+  <% end %>
+</p>

@@ -1,0 +1,36 @@
+<h1>New Entries</h1>
+
+<%= form_with do %>
+  <p>
+    <%= label_tag 'entries_year', 'Year' %> <br />
+    <%= number_field_tag 'entries[year]' %>
+  </p>
+  <p>
+    <%= label_tag 'entries_week', 'Week' %> <br />
+    <%= number_field_tag 'entries[week]' %>
+  </p>
+  <table>
+    <tbody>
+      <% (1..10).each do |position| %>
+        <tr>
+          <td class="positions">
+            <%= label_tag "entries_position_#{position}", "#{position}." %>
+          </td>
+          <td>
+            <%= 
+              select_tag(
+                'entries[songs]',
+                options_from_collection_for_select(Song.all, :id, :display)
+              )
+            %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= submit_tag 'Create' %></p>
+<% end %>
+
+<p>
+  <span class="symbol">❌</span> <%= link_to 'Cancel', years_path %>
+</p>
