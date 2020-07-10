@@ -1,0 +1,11 @@
+<h1>Songs</h1>
+
+<p>
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %> <br />
+  <span class="symbol">➕</span> <%= link_to 'Create New', new_song_path %>
+</p>
+<p>
+  <% @songs.each do |song| %>
+    <%= link_to "\"#{song.title}\" - #{song.artists.map(&:name).to_sentence}", song_path(song) %>
+  <% end %>
+</p>

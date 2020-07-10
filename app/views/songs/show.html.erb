@@ -1,0 +1,17 @@
+<h1><%= "\"#{@song.title}\"" %></h1>
+
+<p>
+  Artists: <br />
+  <% @song.artists.each do |artist| %>
+    <%= link_to artist.name, artist_path(artist) %>
+  <% end %>
+</p>
+
+<p>
+  <span class="symbol">✏️</span>
+  <%= link_to "Update", edit_song_path(@song) %>
+</p>
+<p>
+  <span class="symbol">‍🎵</span> <%= link_to "Songs", songs_path %><br />
+  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
+</p>

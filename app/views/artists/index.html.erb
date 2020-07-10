@@ -5,7 +5,7 @@
   <span class="symbol">➕</span> <%= link_to 'Create New', new_artist_path %>
 </p>
 <p>
-    <% @artists.each do |artist| %>
-        <%= link_to artist.name, artist_path(artist) %>
-    <% end %>
+  <% @artists.each do |artist| %>
+    <%= link_to artist.name, artist_path(artist) %>
+  <% end %>
 </p>

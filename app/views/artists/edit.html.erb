@@ -1,10 +1,13 @@
 <h1>New Artist</h1>
 
 <%= form_with model: @artist do |f| %>
-    <p><%= f.text_field :name %></p>
-    <p><%= f.submit 'Update' %></p>
+  <p>
+    <%= f.label :name, 'Name' %> <br />
+      <%= f.text_field :name %>
+  </p>
+  <p><%= f.submit 'Update' %></p>
 <% end %>
 
 <p>
-    <span class="symbol">❌</span> <%= link_to 'Cancel', artist_path(@artist) %>
+  <span class="symbol">❌</span> <%= link_to 'Cancel', artist_path(@artist) %>
 </p>
