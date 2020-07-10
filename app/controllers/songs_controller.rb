@@ -1,7 +1,7 @@
 class SongsController < ApplicationController
   def create
     ActiveRecord::Base.transaction do
-      @song = Song.create(song_params)
+      @song = Song.create!(song_params)
       if params[:song][:artist_id].blank?
         raise ActionController::ParameterMissing
       end
@@ -29,7 +29,7 @@ class SongsController < ApplicationController
   def update
     ActiveRecord::Base.transaction do
       @song = Song.find(params[:id])
-      @song.update(song_params)
+      @song.update!(song_params)
       if params[:song][:artist_id].blank?
         raise ActionController::ParameterMissing
       end

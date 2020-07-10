@@ -1,0 +1,31 @@
+<h1>Update Entries of <%= "Week #{@week}, #{@year}" %></h1>
+
+<%= form_with url: update_entries_path(year: @year, week: @week), method: :put do %>
+  <table class="entries-form">
+    <tbody>
+      <% (1..10).each do |position| %>
+        <tr>
+          <td class="positions">
+            <%= label_tag "entries_position_#{position}", "#{position}." %>
+          </td>
+          <td>
+            <%= 
+              select_tag(
+                "entries[songs][#{position}]",
+                options_from_collection_for_select(
+                  Song.all, :id, :display, @entries[position - 1].song_id
+                )
+              )
+            %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p><%= submit_tag 'Update' %></p>
+<% end %>
+
+<p>
+  <span class="symbol">❌</span>
+  <%= link_to 'Cancel', entries_index_path(year: @year, week: @week) %>
+</p>
