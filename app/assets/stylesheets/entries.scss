@@ -2,12 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-.positions {
-    text-align: right;
-}
-
 table.entries-form {
     border: 0
+}
+
+table.entries-form td.positions {
+    text-align: right;
 }
 
 table.entries-form td {
@@ -15,29 +15,125 @@ table.entries-form td {
     padding: 0.2em;
 }
 
-th.position,
-td.position {
-    text-align: right;
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.chart-dates {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 3ex;
+}
+
+.chart-dates > .chart-week {
+    font-size: 2em;
     font-weight: bold;
-    border-left: none;
 }
 
-th.dropped_position,
-td.dropped_position {
-    text-align: right;
+.chart-navigation {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    text-align: center;
 }
 
-
-td.state {
-    border-right: none;
+.chart-navigation > div {
+    margin: auto 1ch;    
 }
 
-td.difference {
-    border-left: none;
-    border-right: none;
+ol.chart {
+    border: solid 1px #d3d3d3;
+    padding: 0;
+    width: 1000px;
+    max-width: 100%;
 }
 
-.difference {
+li.entry {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 150px;
+    border-bottom: solid 1px #d3d3d3;
+}
+
+div.positional {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 2.5%;
+    min-width: 10%;
+    text-align: center;
+}
+
+div.position {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+span.difference {
     color: #808080;
     font-family: monospace;
+}
+
+div.entry-artwork-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 15%;
+}
+
+img.entry-artwork {
+    display: block;
+    max-height: 150px;
+    max-width: 150px;
+    margin: auto;
+}
+
+div.entry-song {
+    padding: 0 3%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 55%;
+}
+
+div.entry-song > div.song-title {
+    font-size: 1.5em;
+}
+
+div.rating-container {
+    min-width: 10%;
+    line-height: 150px;
+    text-align: left;
+    padding: 0 1%;
+}
+
+li.entry span.rating {
+    padding: 0.25em;
+    color: #fff;
+    width: 3.5ch;
+    font-weight: bold;
+    border-radius: 4px;
+    font-size: 1.25em;
+}
+
+div.links {
+    min-width: 8%;
+    line-height: 150px;
+    text-align: center;
+    padding: 0 2%;
+    font-size: 1.5em;
+}
+
+table.dropped-entries td {
+    line-height: 1.2em;
+    height: 1.2em;
+}
+
+th.dropped-position,
+td.dropped-position {
+    text-align: right;
 }

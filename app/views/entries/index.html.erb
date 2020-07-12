@@ -1,93 +1,132 @@
-<h1>Chart</h1>
-<h2>Week <%= @week %>, <%= @year %></h2>
-<p>
-  <%= @week_start.strftime('%-d %B %Y') %> -
-  <%= @week_end.strftime('%-d %B %Y') %><br />
-</p>
-<p>
-  <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
-  <br />
-  <span class="symbol">⬅️</span>
-  <%= 
-    link_to(
-      'Prev Week',
-      entries_index_path(week: @prev_week.cweek, year: @prev_week.cwyear)
-    )
-  %>
-  |
-  <%= 
-    link_to(
-      'Next Week',
-      entries_index_path(week: @next_week.cweek, year: @next_week.cwyear)
-    )
-  %>
-  <span class="symbol">➡️</span><br />
-</p>
-<table>
-  <thead>
-    <tr>
-      <th>&nbsp;</th>
-      <th>&nbsp;</th>
-      <th class="position">#</th>
-      <th>Title</th>
-      <th>Artist</th>
-      <th>Rating</th>
-    </tr>
-  </thead>
-  <tbody>
+<div class="chart-container">
+  <h1>Chart</h1>
+  <div class="chart-dates">
+    <div class="chart-week">Week <%= @week %>, <%= @year %></div>
+    <div>
+      <%= @week_start.strftime('%-d %B %Y') %> －
+      <%= @week_end.strftime('%-d %B %Y') %>
+    </div>
+  </div>
+  <div class="chart-navigation">
+    <div>
+      <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
+    </div>
+  </div>
+  <div class="chart-navigation">
+    <div>
+      <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
+    </div>
+    <div>
+      <span class="symbol">🗓️</span>
+      <%= link_to "This Year", weeks_path(year: @year) %>
+    </div>
+  </div>
+  <div class="chart-navigation">
+    <div>
+      <span class="symbol">⬅️</span>
+      <%= 
+        link_to(
+          'Prev Week',
+          entries_index_path(week: @prev_week.cweek, year: @prev_week.cwyear)
+        )
+      %>
+    </div>
+    <div>
+      <%= 
+        link_to(
+          'Next Week',
+          entries_index_path(week: @next_week.cweek, year: @next_week.cwyear)
+        )
+      %>
+      <span class="symbol">➡️</span>
+    </div>
+  </div>
+  <ol class="chart">
     <% @entries.each do |entry| %>
-      <tr>
-        <td class="state"><span class="symbol"><%= entry.state %></span></td>
-        <td class="difference"><%= entry.difference_display %></td>
-        <td class="position"><%= entry.position %></td>
-        <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
-        <td><%= entry.song.display_artist %></td>
-        <td>
+      <li class="entry">
+        <div class="positional">
+          <div class="position"><%= entry.position %></div>
+          <div class="state">
+            <span class="symbol"><%= entry.state %></span>
+            <span class="difference"><%= entry.difference_display %></span>
+          </div>
+        </div>
+        <div class="entry-artwork-container">
+          <%= 
+            image_tag("/images/songs/#{entry.song.id}.jpg", class: 'entry-artwork')
+          %>
+        </div>
+        <div class="entry-song">
+          <div class="song-title">
+            <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
+          </div>
+          <div><%= entry.song.display_artist %></div>
+        </div>
+        <div class="rating-container">
           <%=
             tag.span(
               entry.song.display_rating,
               class: "rating #{entry.song.rating_color}"
             )
           %>
-          <% if entry.song.is_liked %><span class="symbol">❤️</span><% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<% if @dropped_entries.exists? %>
-  <h5>Dropped Previous Entries</h5>
-  <table>
-    <thead>
-      <tr>
-        <th class="dropped_position">#</th>
-        <th>Title</th>
-        <th>Artist</th>
-        <th>Rating</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @dropped_entries.each do |entry| %>
-        <tr>
-          <td class="dropped_position"><%= entry.position %></td>
-          <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
-          <td><%= entry.song.display_artist %></td>
-          <td>
+          <% if entry.song.fondness != 0 %>
+            <span class="symbol"><%= entry.song.display_fondness %></span>
+          <% end %>
+        </div>
+        <div class="links">
+          <% if entry.song.stream_link.present? %>
             <%=
-              tag.span(
-                entry.song.display_rating,
-                class: "rating #{entry.song.rating_color}"
+              link_to(
+                '️🎧', entry.song.stream_link, rel: 'external', target: '_blank',
+                class: 'symbol', title: 'Stream'
               )
             %>
-            <% if entry.song.is_liked %><span class="symbol">❤️</span><% end %>
-          </td>
+          <% end %>
+          <% if entry.song.video_link.present? %>
+            <%=
+              link_to(
+                '📺', entry.song.video_link, rel: 'external', target: '_blank',
+                class: 'symbol', title: 'Video'
+              )
+            %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+  <% if @dropped_entries.exists? %>
+    <h5>Dropped Previous Entries</h5>
+    <table class="dropped-entries">
+      <thead>
+        <tr>
+          <th class="dropped-position">#</th>
+          <th>Title</th>
+          <th>Artist</th>
+          <th></th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-<p>
-  <span class="symbol">🗓️</span>
-  <%= link_to "This Year", weeks_path(year: @year) %><br />
-  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
-</p>
+      </thead>
+      <tbody>
+        <% @dropped_entries.each do |entry| %>
+          <tr>
+            <td class="dropped-position"><%= entry.position %></td>
+            <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
+            <td><%= entry.song.display_artist %></td>
+            <td>
+              <%=
+                tag.span(
+                  entry.song.display_rating,
+                  class: "rating #{entry.song.rating_color}"
+                )
+              %>
+              <% if entry.song.fondness != 0 %>
+                <span class="symbol"><%= entry.song.display_fondness %></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <p>
+  </p>
+</div>

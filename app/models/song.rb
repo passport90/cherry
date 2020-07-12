@@ -8,8 +8,22 @@ class Song < ApplicationRecord
     "\"#{title}\" - #{artists.pluck(:name).to_sentence}"
   end
 
+  def display_entry_option
+    "#{title} - #{artists.pluck(:name).to_sentence}"
+  end
+
   def display_artist
     artists.pluck(:name).to_sentence
+  end
+
+  def display_fondness
+    if fondness < 0
+      '👎'
+    elsif fondness == 1
+      '👍'
+    elsif fondness > 1
+      '😍'
+    end
   end
 
   def display_rating

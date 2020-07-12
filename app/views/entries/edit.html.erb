@@ -17,7 +17,8 @@
               select_tag(
                 "entries[songs][#{position}]",
                 options_from_collection_for_select(
-                  Song.all, :id, :display, @entries[position - 1].song_id
+                  Song.all, :id, :display_entry_option,
+                  @entries[position - 1].song_id
                 )
               )
             %>

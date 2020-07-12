@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+* {
+    font-family: "Helvetica Neue", sans-serif;
+}
 
 a {
     text-decoration: none;
@@ -21,6 +24,15 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+div {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3.5em;
+    font-weight: 100;
 }
 
 table {
@@ -46,18 +58,30 @@ td {
     border: solid 1px #2C365E;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+}
+
 p.home {
     font-size: 2em;
 }
 
 img.headline {
-    display: block;
     max-height: 400px;
     width: auto;
 }
 
 .symbol {
     font-family: sans-serif;
+}
+
+a.symbol:hover {
+    text-decoration: none;
+}
+
+input[type="number"] {
+    width: 8ch;
 }
 
 span.rating {

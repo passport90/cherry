@@ -20,7 +20,9 @@
             <%= 
               select_tag(
                 "entries[songs][#{position}]",
-                options_from_collection_for_select(Song.all, :id, :display)
+                options_from_collection_for_select(
+                  Song.all, :id, :display_entry_option
+                )
               )
             %>
           </td>

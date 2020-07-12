@@ -10,13 +10,13 @@
     <%=
       f.collection_select(
         :artist_id, Artist.all, :id, :name, {include_hidden: false},
-        {multiple: true}
+        {multiple: true, class: 'artist-select'}
       )
     %>
   </p>
   <p>
-    <%= f.check_box :is_liked %>
-    <%= f.label :is_liked, "Liked" %>
+    <%= f.label :fondness, 'Fondness' %> <br />
+    <%= f.number_field :fondness %>
   </p>
   <p>
     <%= f.label :video_link, 'Video Link' %> <br />

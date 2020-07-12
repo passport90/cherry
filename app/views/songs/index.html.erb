@@ -4,8 +4,12 @@
   <span class="symbol">🏠</span> <%= link_to 'Home', root_path %> <br />
   <span class="symbol">➕</span> <%= link_to 'Create New', new_song_path %>
 </p>
-<p>
-  <% @songs.each do |song| %>
-    <%= link_to song.display, song_path(song) %><br />
-  <% end %>
-</p>
+<% @songs.each do |song| %>
+  <div class="song-list-entry">
+    <%= link_to song.display, song_path(song) %>
+    <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>
+    <% if song.fondness != 0 %>
+      <span class="symbol"><%= song.display_fondness %></span>
+    <% end %>
+  </p>
+<% end %>
