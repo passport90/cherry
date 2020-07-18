@@ -5,8 +5,8 @@ class Entry < ApplicationRecord
 
   def previous_entry
     Entry.unscoped.where(song: song)
-          .where('year <= ?', year).where('week < ?', week)
-          .order(:year, :week).last
+         .where('(year = ? and week < ?) or (year < ?)', year, week, year)
+         .order(:year, :week).last
   end
   memoize :previous_entry
 
@@ -36,31 +36,35 @@ class Entry < ApplicationRecord
   def state
     if difference.nil?
       if indirect_previous?
-        '🔼️'
+        { symbol: '⬆︎', color: 'green' }
       else
-        '️️❇️️️'
+        { symbol: '️️✽', color: 'gold' }
       end
     elsif difference > 0
-      '🔼️'
+      { symbol: '⬆︎', color: 'green' }
     elsif difference < 0
-      '🔽'
+      { symbol: '⬇︎', color: 'red' }
     else
-      '➖'
+      { symbol: '—', color: 'gray' }
     end
   end
+  memoize :state
 
   def indirect_previous?
     return if previous_entry.nil?
     if year == previous_entry.year
       week - previous_entry.week > 1
     elsif week == 1
-      date = Date.strptime(year.to_s + week.to_s.rjust(2, '0'), '%G%V')
-      prev_entry_date = Date.strptime(
-        previous_entry.year.to_s + previous_entry.week.to_s.rjust(2, '0'),
-        '%G%V'
-      )
-      date - prev_entry_date > 1.week
+      week_start - previous_entry.week_start > 1.week
     end
   end
   memoize :indirect_previous?
+
+  def week_start
+    @week_start ||= Date.strptime(year.to_s + week.to_s.rjust(2, '0'), '%G%V')
+  end
+
+  def week_end
+    @week_end ||= week_start + 6.days
+  end
 end

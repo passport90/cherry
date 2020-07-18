@@ -47,7 +47,12 @@
         <div class="positional">
           <div class="position"><%= entry.position %></div>
           <div class="state">
-            <span class="symbol"><%= entry.state %></span>
+            <%= 
+              tag.span(
+                entry.state[:symbol],
+                class: "state-symbol #{entry.state[:color]}"
+              )
+            %>
             <span class="difference"><%= entry.difference_display %></span>
           </div>
         </div>
@@ -60,7 +65,9 @@
           <div class="song-title">
             <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
           </div>
-          <div><%= entry.song.display_artist %></div>
+          <div class="song-artist">
+            <%= raw(display_song_artist_with_link(entry.song)) %>
+          </div>
         </div>
         <div class="rating-container">
           <%=
@@ -69,8 +76,10 @@
               class: "rating #{entry.song.rating_color}"
             )
           %>
-          <% if entry.song.fondness != 0 %>
-            <span class="symbol"><%= entry.song.display_fondness %></span>
+          <% if entry.song.display_symbol? %>
+            <span class="symbol">
+              <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
+            </span>
           <% end %>
         </div>
         <div class="links">
@@ -109,8 +118,10 @@
         <% @dropped_entries.each do |entry| %>
           <tr>
             <td class="dropped-position"><%= entry.position %></td>
-            <td><%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %></td>
-            <td><%= entry.song.display_artist %></td>
+            <td>
+              <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
+            </td>
+            <td><%= raw(display_song_artist_with_link(entry.song)) %></td>
             <td>
               <%=
                 tag.span(
@@ -118,8 +129,10 @@
                   class: "rating #{entry.song.rating_color}"
                 )
               %>
-              <% if entry.song.fondness != 0 %>
-                <span class="symbol"><%= entry.song.display_fondness %></span>
+              <% if entry.song.display_symbol? %>
+                <span class="symbol">
+                  <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
+                </span>
               <% end %>
             </td>
           </tr>

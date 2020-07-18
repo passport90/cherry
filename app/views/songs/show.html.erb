@@ -4,26 +4,26 @@
 <h1><%= "\"#{@song.title}\"" %></h1>
 
 <p class="song-artists">
-  <% @song.artists.each do |artist| %>
-    <%= link_to artist.name, artist_path(artist) %> <br />
-  <% end %>
+  <%= raw(display_song_artist_with_link(@song)) %>
 </p>
 
 
 <p>
   <%= tag.span @song.display_rating, class: "rating #{@song.rating_color}" %>
-  <% if @song.fondness != 0 %>
-    <span class="symbol"><%= @song.display_fondness %></span>
+  <% if @song.display_symbol? %>
+    <span class="symbol">
+      <% if @song.is_acclaimed %>💎<% end %><%= @song.display_fondness %>
+    </span>
   <% end %>
 </p>
 
 <% if @entrance.present? %>
 <p>
   <span class="symbol">⛰️</span> 
-  #<%= @peak.position %> in 
+  <span class="peak-position">#<%= @peak.position %></span> on 
   <%= 
     link_to(
-      "Week #{@peak.week}, #{@peak.year}",
+      @peak.week_start.strftime('%-d %B %Y'),
       entries_index_path(year: @peak.year, week: @peak.week)
     )
   %>
@@ -31,13 +31,13 @@
   <span class="symbol">🏃</span>
   <%= 
     link_to(
-      "Week #{@entrance.week}, #{@entrance.year}",
+      @entrance.week_start.strftime('%-d %B %Y'),
       entries_index_path(year: @entrance.year, week: @entrance.week)
     )
   %> to 
   <%= 
     link_to(
-      "Week #{@exit.week}, #{@exit.year}",
+      @exit.week_end.strftime('%-d %B %Y'),
       entries_index_path(year: @exit.year, week: @exit.week)
     )
   %>

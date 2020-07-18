@@ -1,12 +1,19 @@
-<h2><%= @artist.name %></h2>
+<h1><%= @artist.name %></h1>
 
 <% if @artist.songs.present? %>
-  <p>
-    Songs: <br />
+  <ul class="song-list">
     <% @artist.songs.each do |song| %>
-      <%= link_to "\"#{song.title}\"", song_path(song) %> <br />
+      <li>
+        <%= link_to "\"#{song.title}\"", song_path(song) %>
+        <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>
+        <% if song.display_symbol? %>
+          <span class="symbol">
+            <% if song.is_acclaimed %>💎<% end %><%= song.display_fondness %>
+          </span>
+        <% end %>
+      </li>
     <% end %>
-  </p>
+  </ul>
 <% end %>
 
 <p>

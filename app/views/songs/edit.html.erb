@@ -30,6 +30,10 @@
     <%= f.label :rating, 'Rating' %> <br />
     <%= f.text_field :rating, class: 'rating' %>
   </p>
+  <p>
+    <%= f.check_box :is_acclaimed %>
+    <%= f.label :is_acclaimed, 'Acclaimed' %> <br />
+  </p>
   <p><%= f.submit 'Update' %></p>
 <% end %>
 

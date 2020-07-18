@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_12_001819) do
+ActiveRecord::Schema.define(version: 2020_07_12_024114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2020_07_12_001819) do
     t.string "video_link"
     t.decimal "rating"
     t.integer "fondness", default: 0, null: false
+    t.boolean "is_acclaimed", default: false, null: false
   end
 
 end

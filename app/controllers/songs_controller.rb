@@ -48,6 +48,8 @@ class SongsController < ApplicationController
 private
   def song_params
     params.require(:song)
-          .permit(:title, :fondness, :stream_link, :video_link, :rating)
+          .permit(
+            :title, :fondness, :stream_link, :video_link, :rating, :is_acclaimed
+          )
   end
 end

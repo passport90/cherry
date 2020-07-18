@@ -16,13 +16,17 @@ class Song < ApplicationRecord
     artists.pluck(:name).to_sentence
   end
 
+  def display_symbol?
+    fondness != 0 || is_acclaimed
+  end
+
   def display_fondness
     if fondness < 0
       '👎'
     elsif fondness == 1
       '👍'
     elsif fondness > 1
-      '😍'
+      '❤️'
     end
   end
 

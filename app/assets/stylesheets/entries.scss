@@ -59,6 +59,10 @@ li.entry {
     border-bottom: solid 1px #d3d3d3;
 }
 
+li.entry:last-child {
+    border-bottom: none;
+}
+
 div.positional {
     display: flex;
     flex-direction: column;
@@ -73,9 +77,24 @@ div.position {
     font-weight: bold;
 }
 
+div.state {
+    font-size: 0.75em;
+}
+.state-symbol.gray {
+    color: #ccc;
+}
+.state-symbol.red {
+    color: #f00;
+}
+.state-symbol.gold {
+    color: #e7bd42;
+}
+.state-symbol.green {
+    color: #6c3;
+}
+
 span.difference {
     color: #808080;
-    font-family: monospace;
 }
 
 div.entry-artwork-container {
@@ -87,8 +106,8 @@ div.entry-artwork-container {
 
 img.entry-artwork {
     display: block;
-    max-height: 150px;
-    max-width: 150px;
+    max-height: 148px;
+    max-width: 148px;
     margin: auto;
 }
 
@@ -97,7 +116,7 @@ div.entry-song {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 55%;
+    width: 53%;
 }
 
 div.entry-song > div.song-title {
@@ -105,7 +124,7 @@ div.entry-song > div.song-title {
 }
 
 div.rating-container {
-    min-width: 10%;
+    min-width: 12%;
     line-height: 150px;
     text-align: left;
     padding: 0 1%;
