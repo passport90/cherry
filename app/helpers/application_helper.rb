@@ -1,5 +1,3 @@
-require 'htmlentities'
-
 module ApplicationHelper
   def artist_link(artist)
     link_to artist.name, artist_path(artist)

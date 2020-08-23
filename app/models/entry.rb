@@ -56,6 +56,8 @@ class Entry < ApplicationRecord
       week - previous_entry.week > 1
     elsif week == 1
       week_start - previous_entry.week_start > 1.week
+    else
+      true
     end
   end
   memoize :indirect_previous?
