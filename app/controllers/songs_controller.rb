@@ -15,7 +15,7 @@ class SongsController < ApplicationController
   end
 
   def index
-    @songs = Song.all
+    @songs = Song.order_by_median_desc.all
   end
 
   def new

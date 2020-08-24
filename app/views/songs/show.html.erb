@@ -28,6 +28,23 @@
     )
   %>
   <br />
+  <% 
+    if (@song.stat_date.present? and
+        @song.stat_date.median_year.present? and
+        @song.stat_date.median_week.present?)
+  %>
+    <span class="symbol">⚖️</span> 
+    <%= 
+      link_to(
+        @song.median_date.strftime('%-d %B %Y'),
+        entries_index_path(
+          year: @song.stat_date.median_year, 
+          week: @song.stat_date.median_week
+        )
+      )
+    %>
+    <br />
+  <% end %>
   <span class="symbol">🏃</span>
   <%= 
     link_to(

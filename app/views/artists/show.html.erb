@@ -1,8 +1,8 @@
 <h1><%= @artist.name %></h1>
 
-<% if @artist.songs.present? %>
+<% if @artist.songs.exists? %>
   <ul class="song-list">
-    <% @artist.songs.each do |song| %>
+    <% @artist.songs.order_by_median.each do |song| %>
       <li>
         <%= link_to "\"#{song.title}\"", song_path(song) %>
         <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>

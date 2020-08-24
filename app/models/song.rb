@@ -2,7 +2,20 @@ class Song < ApplicationRecord
   extend Memoist
   has_and_belongs_to_many :artists
   has_many :entries
-  default_scope { includes(:artists).order(:title) }
+  has_one :stat_date
+  default_scope { includes(:artists) }
+
+  scope :order_by_median, -> do
+    includes(:stat_date).order('"stat_dates"."median_year", '\
+                               '"stat_dates"."median_week", '\
+                               '"songs"."title"')
+  end
+
+  scope :order_by_median_desc, -> do
+    includes(:stat_date).order('"stat_dates"."median_year" DESC, '\
+                               '"stat_dates"."median_week" DESC, '\
+                               '"songs"."title"')
+  end
 
   def display
     "\"#{title}\" - #{artists.pluck(:name).to_sentence}"
@@ -48,8 +61,15 @@ class Song < ApplicationRecord
   end
 
   def peak_entry
-    entries.unscoped.where(song: self).order(:position).order(:year)
+    Entry.unscoped.where(song: self).order(:position).order(:year)
             .order(:week).first
   end
   memoize :peak_entry
+
+  def median_date
+    Date.strptime(
+      stat_date.median_year.to_s + stat_date.median_week.to_s.rjust(2, '0'),
+      '%G%V'
+    ) + 3.days
+  end
 end

@@ -39,7 +39,7 @@ class EntriesController < ApplicationController
     @year = params[:year].to_i
     @week = params[:week].to_i
 
-    @entries = Entry.where(year: @year, week: @week)
+    @entries = Entry.where(year: @year, week: @week).load
     raise ActionController::RoutingError if @entries.size < 10
 
     @week_start = Date.strptime(@year.to_s + @week.to_s.rjust(2, '0'), '%G%V')
@@ -51,7 +51,7 @@ class EntriesController < ApplicationController
     @dropped_entries = (
       Entry.unscoped.where(
         year: @prev_week.cwyear, week: @prev_week.cweek,
-      ).where.not(song_id: @entries.pluck(:song_id))
+      ).where.not(song_id: @entries.pluck(:song_id)).load
     )
   end
 

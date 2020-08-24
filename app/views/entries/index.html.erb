@@ -103,7 +103,7 @@
       </li>
     <% end %>
   </ol>
-  <% if @dropped_entries.exists? %>
+  <% unless @dropped_entries.empty? %>
     <h5>Dropped Previous Entries</h5>
     <table class="dropped-entries">
       <thead>
