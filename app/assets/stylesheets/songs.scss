@@ -44,10 +44,34 @@ select.artist-select {
     height: 10em;
 }
 
-p.song-artists {
-    font-size: 1.2em;
+/* Show */
+.song-artwork {
+    height: 400px;
+    width: auto;
+}
+
+.song-artists {
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+.song-rating {
+    margin-bottom: 1em;
+    font-size: 2em;
 }
 
 span.peak-position {
     font-weight: bold;
+}
+
+.icon-list {
+    display: flex;
+    flex-direction: row;
+}
+
+.icon-list__el {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 1em;
 }

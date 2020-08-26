@@ -52,17 +52,6 @@ ul, ol {
     padding: 0;
 }
 
-table {
-    table-layout: auto;
-    border-collapse: collapse;
-    border: 2px solid #2C365E;
-}
-
-th, td {
-    padding: 0.5em;
-    font-family: "Helvetica Neue", sans-serif;
-}
-  
 th {
     text-align: left;
     background-color: #2C365E;
@@ -81,15 +70,6 @@ img {
     border: solid 1px #d3d3d3;
 }
 
-p.home {
-    font-size: 2em;
-}
-
-img.headline {
-    max-height: 400px;
-    width: auto;
-}
-
 .symbol {
     font-family: sans-serif;
 }
@@ -98,9 +78,6 @@ a.symbol:hover {
     text-decoration: none;
 }
 
-input[type="number"] {
-    width: 8ch;
-}
 
 span.rating {
     padding: 0.25em;
@@ -169,6 +146,7 @@ h1.home-name {
     margin: 1.5em 4.15%;
 }
 
+/* Icons */
 .icon {
     font-size: 4em;
     text-align: center;
@@ -284,6 +262,22 @@ h1.home-name {
 .long-list__el {
     margin: 1% 0;
     width: 31%;
+}
+
+/* Action List */
+.action-list {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+    justify-content: center;
+}
+
+.action-list__el {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 5em;
+    margin: 0 1em;
 }
 
 /* Page List */
