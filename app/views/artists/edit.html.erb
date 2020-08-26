@@ -1,13 +1,29 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Artists', artists_path %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= link_to @artist.name, artist_path(@artist) %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    Edit
+  </div>
+</div>
+
 <h1>Update Artist</h1>
 
-<%= form_with model: @artist do |f| %>
-  <p>
-    <%= f.label :name, 'Name' %> <br />
+<div class="form">
+  <%= form_with model: @artist do |f| %>
+    <div class="form__el">
+      <%= f.label :name, 'Name' %>
       <%= f.text_field :name %>
-  </p>
-  <p><%= f.submit 'Update' %></p>
-<% end %>
-
-<p>
-  <span class="symbol">❌</span> <%= link_to 'Cancel', artist_path(@artist) %>
-</p>
+    </div>
+    <div class="form__el--submit"><%= f.submit 'Create' %></div>
+  <% end %>
+</div>

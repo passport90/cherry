@@ -13,40 +13,40 @@
 <h1>New Song</h1>
 
 <div class="form">
-<%= form_with model: @song do |f| %>
-  <div class="form__el">
-    <%= f.label :title, 'Title' %>
-    <%= f.text_field :title %>
-  </div>
-  <div class="form__el">
-    <%= f.label :artist, 'Artist(s)' %>
-    <%=
-      f.collection_select(
-        :artist_id, Artist.all, :id, :name, {include_hidden: false},
-        {multiple: true, class: 'artist-select'}
-      )
-    %>
-  </div>
-  <div class="form__el">
-    <%= f.label :fondness, 'Fondness' %>
-    <%= f.number_field :fondness %>
-  </div>
-  <div class="form__el">
-    <%= f.label :video_link, 'Video Link' %>
-    <%= f.text_area :video_link, class: 'url' %>
-  </div>
-  <div class="form__el">
-    <%= f.label :stream_link, 'Stream Link' %>
-    <%= f.text_area :stream_link, class: 'url' %>
-  </div>
-  <div class="form__el">
-    <%= f.label :rating, 'Rating' %>
-    <%= f.text_field :rating, class: 'rating' %>
-  </div>
-  <div class="form__el">
-    <%= f.check_box :is_acclaimed %>
-    <%= f.label :is_acclaimed, 'Acclaimed' %>
-  </div>
-  <div class="form__el--submit"><%= f.submit 'Create' %></div>
-<% end %>
+  <%= form_with model: @song do |f| %>
+    <div class="form__el">
+      <%= f.label :title, 'Title' %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="form__el">
+      <%= f.label :artist, 'Artist(s)' %>
+      <%=
+        f.collection_select(
+          :artist_id, Artist.all, :id, :name, {include_hidden: false},
+          {multiple: true, class: 'artist-select'}
+        )
+      %>
+    </div>
+    <div class="form__el">
+      <%= f.label :fondness, 'Fondness' %>
+      <%= f.number_field :fondness %>
+    </div>
+    <div class="form__el">
+      <%= f.label :video_link, 'Video Link' %>
+      <%= f.text_area :video_link, class: 'url' %>
+    </div>
+    <div class="form__el">
+      <%= f.label :stream_link, 'Stream Link' %>
+      <%= f.text_area :stream_link, class: 'url' %>
+    </div>
+    <div class="form__el">
+      <%= f.label :rating, 'Rating' %>
+      <%= f.text_field :rating, class: 'rating' %>
+    </div>
+    <div class="form__el">
+      <%= f.check_box :is_acclaimed %>
+      <%= f.label :is_acclaimed, 'Acclaimed' %>
+    </div>
+    <div class="form__el--submit"><%= f.submit 'Create' %></div>
+  <% end %>
 </div>

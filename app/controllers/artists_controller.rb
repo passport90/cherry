@@ -23,6 +23,12 @@ class ArtistsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
+    items_per_page = 50
+    @page = params.fetch(:page, 0).to_i
+    @page_count = (@artist.songs.count.to_f / items_per_page).ceil
+    @songs = @artist.songs.order_by_median_desc
+                 .offset(@page * items_per_page).limit(items_per_page)
+                 .all
   end
 
   def update

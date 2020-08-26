@@ -1,26 +1,63 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Artists', artists_path %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= @artist.name %>
+  </div>
+</div>
+
 <h1><%= @artist.name %></h1>
 
-<% if @artist.songs.exists? %>
-  <ul class="song-list">
-    <% @artist.songs.order_by_median.each do |song| %>
-      <li>
-        <%= link_to "\"#{song.title}\"", song_path(song) %>
-        <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>
-        <% if song.display_symbol? %>
-          <span class="symbol">
-            <% if song.is_acclaimed %>💎<% end %><%= song.display_fondness %>
-          </span>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
 
-<p>
-  <span class="symbol">✏️</span>
-  <%= link_to "Edit", edit_artist_path(@artist) %>
-</p>
-<p>
-  <span class="symbol">🧑‍🎤</span> <%= link_to 'Artists', artists_path %> <br />
-  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
-</p>
+<div class="center-wrapper">
+  <% if @songs.length > 0 %>
+    <ol class="song-list">
+      <% @songs.each do |song| %>
+        <li class="song-list__el">
+          <%= link_to "\"#{song.title}\"", song_path(song) %>
+          <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>
+          <% if song.display_symbol? %>
+            <span class="symbol">
+              <% if song.is_acclaimed %>💎<% end %><%= song.display_fondness %>
+            </span>
+          <% end %>
+        </li>
+      <% end %>
+    </ol>
+    <% if @page_count > 1 %>
+      <div class="page-list-wrapper">
+        <div class="page-list-title">Pages</div>
+        <ol class="page-list">
+          <% @page_count.times do |p| %>
+            <li class="page-list__el">
+              <% if @page != p %>
+                <%= link_to p + 1, artist_path(@artist, page: p) %>
+              <% else %>
+                <b><%= p + 1 %></b>
+              <% end %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    <% end %>
+  <% end %>
+  <ul class="action-list">
+    <li class="action-list__el">
+      <%= 
+        link_to(
+          '️✏️️️', edit_artist_path(@artist),
+          class: 'icon--small symbol block-link'
+        )
+      %>
+      <div class="icon-text--small">
+        <%= link_to 'Edit', edit_artist_path(@artist) %>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<%= link_to '+', new_artist_path, class: 'create-button' %>
