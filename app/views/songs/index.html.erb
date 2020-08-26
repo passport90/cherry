@@ -1,10 +1,10 @@
 <h1>Songs</h1>
 
 <% if @songs.length > 0 %>
-  <div class="long-list-wrapper">
-    <ol class="long-list">
+  <div class="song-list-wrapper">
+    <ol class="song-list">
       <% @songs.each do |song| %>
-        <li class="long-list__el">
+        <li class="song-list__el">
           <%= 
             link_to song.display, song_path(song)
           %>

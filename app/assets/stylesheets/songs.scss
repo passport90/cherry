@@ -2,6 +2,32 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+/* Index */
+.song-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.song-list {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    max-height: 75em;
+}
+
+.song-list__el {
+    margin: 1% 0;
+    width: 48%;
+    line-height: 1.5em;
+    height: 1.5em;
+}
+
+/* Form */
 input.rating {
     font-family: monospace;
     width: 4ch;

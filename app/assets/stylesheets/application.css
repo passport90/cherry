@@ -204,7 +204,7 @@ h1.home-name {
     flex-direction: row;
     height: 4em;
     width: 100%;
-    border-bottom: solid 1px #2C365E;
+    border-bottom: solid 1px #c44536;
     margin-bottom: 1em;
     padding: 0 5%;
 }
@@ -278,7 +278,7 @@ h1.home-name {
     flex-direction: column;
     flex-wrap: wrap;
     margin: 0 auto;
-    height: 52em;
+    max-height: 52em;
 }
 
 .long-list__el {
