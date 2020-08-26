@@ -1,42 +1,52 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Songs', songs_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    New Song
+  </div>
+</div>
+
 <h1>New Song</h1>
 
+<div class="form">
 <%= form_with model: @song do |f| %>
-  <p>
-    <%= f.label :title, 'Title' %> <br />
+  <div class="form__el">
+    <%= f.label :title, 'Title' %>
     <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :artist, 'Artist(s)' %> <br />
+  </div>
+  <div class="form__el">
+    <%= f.label :artist, 'Artist(s)' %>
     <%=
       f.collection_select(
         :artist_id, Artist.all, :id, :name, {include_hidden: false},
         {multiple: true, class: 'artist-select'}
       )
     %>
-  </p>
-  <p>
-    <%= f.label :fondness, 'Fondness' %> <br />
+  </div>
+  <div class="form__el">
+    <%= f.label :fondness, 'Fondness' %>
     <%= f.number_field :fondness %>
-  </p>
-  <p>
-    <%= f.label :video_link, 'Video Link' %> <br />
+  </div>
+  <div class="form__el">
+    <%= f.label :video_link, 'Video Link' %>
     <%= f.text_area :video_link, class: 'url' %>
-  </p>
-  <p>
-    <%= f.label :stream_link, 'Stream Link' %> <br />
+  </div>
+  <div class="form__el">
+    <%= f.label :stream_link, 'Stream Link' %>
     <%= f.text_area :stream_link, class: 'url' %>
-  </p>
-  <p>
-    <%= f.label :rating, 'Rating' %> <br />
+  </div>
+  <div class="form__el">
+    <%= f.label :rating, 'Rating' %>
     <%= f.text_field :rating, class: 'rating' %>
-  </p>
-  <p>
+  </div>
+  <div class="form__el">
     <%= f.check_box :is_acclaimed %>
-    <%= f.label :is_acclaimed, 'Acclaimed' %> <br />
-  </p>
-  <p><%= f.submit 'Create' %></p>
+    <%= f.label :is_acclaimed, 'Acclaimed' %>
+  </div>
+  <div class="form__el--submit"><%= f.submit 'Create' %></div>
 <% end %>
-
-<p>
-  <span class="symbol">❌</span> <%= link_to 'Cancel', songs_path %>
-</p>
+</div>

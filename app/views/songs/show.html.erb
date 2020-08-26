@@ -1,3 +1,14 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Songs', songs_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= @song.display %>
+  </div>
+</div>
 
 <h1><%= "\"#{@song.title}\"" %></h1>
 

@@ -1,42 +1,59 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Songs', songs_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= link_to @song.display, song_path(@song) %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    Edit
+  </div>
+</div>
+
 <h1>Update Song</h1>
 
-<%= form_with model: @song do |f| %>
-  <p>
-    <%= f.label :title, 'Title' %> <br />
-    <%= f.text_field :title %>
-  </p>
-  <p>
-    <%= f.label :artist, 'Artist(s)' %> <br />
-    <%= 
-      f.collection_select(
-        :artist_id, Artist.all, :id, :name,
-        {selected: @song.artist_ids, include_hidden: false}, {multiple: true}
-      )
-    %>
-  </p>
-  <p>
-    <%= f.label :fondness, 'Fondness' %> <br />
-    <%= f.number_field :fondness %>
-  </p>
-  <p>
-    <%= f.label :video_link, 'Video Link' %> <br />
-    <%= f.text_area :video_link, class: 'url' %>
-  </p>
-  <p>
-    <%= f.label :stream_link, 'Stream Link' %> <br />
-    <%= f.text_area :stream_link, class: 'url' %>
-  </p>
-  <p>
-    <%= f.label :rating, 'Rating' %> <br />
-    <%= f.text_field :rating, class: 'rating' %>
-  </p>
-  <p>
-    <%= f.check_box :is_acclaimed %>
-    <%= f.label :is_acclaimed, 'Acclaimed' %> <br />
-  </p>
-  <p><%= f.submit 'Update' %></p>
-<% end %>
-
-<p>
-  <span class="symbol">❌</span> <%= link_to 'Cancel', song_path(@song) %>
-</p>
+<div class="form">
+  <%= form_with model: @song do |f| %>
+    <div class="form__el">
+      <%= f.label :title, 'Title' %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="form__el">
+      <%= f.label :artist, 'Artist(s)' %>
+      <%=
+        f.collection_select(
+          :artist_id, Artist.all, :id, :name,
+          {selected: @song.artist_ids, include_hidden: false},
+          {multiple: true, class: 'artist-select'}
+        )
+      %>
+    </div>
+    <div class="form__el">
+      <%= f.label :fondness, 'Fondness' %>
+      <%= f.number_field :fondness %>
+    </div>
+    <div class="form__el">
+      <%= f.label :video_link, 'Video Link' %>
+      <%= f.text_area :video_link, class: 'url' %>
+    </div>
+    <div class="form__el">
+      <%= f.label :stream_link, 'Stream Link' %>
+      <%= f.text_area :stream_link, class: 'url' %>
+    </div>
+    <div class="form__el">
+      <%= f.label :rating, 'Rating' %>
+      <%= f.text_field :rating, class: 'rating' %>
+    </div>
+    <div class="form__el">
+      <%= f.check_box :is_acclaimed %>
+      <%= f.label :is_acclaimed, 'Acclaimed' %>
+    </div>
+    <div class="form__el--submit"><%= f.submit 'Update' %></div>
+  <% end %>
+</div>
