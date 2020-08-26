@@ -1,37 +1,34 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Charts', years_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= @year %>
+  </div>
+</div>
+
 <h1><%= @year %> Charts</h1>
-<p>
-  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %><br />
-  <span class="symbol">🗓️</span> <%= link_to 'All Years', years_path %><br />
-  <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
-</p>
-<p>
-  <% if @weeks.length > 0 %>
-    <table class="weeks">
-      <thead>
-        <tr>
-          <th>Week</th>
-          <th>Start</th>
-          <th>End</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @weeks.each do |week| %>
-          <tr>
-            <td>
-              <%= 
-                link_to(
-                  "Week #{week[:week_num]}",
-                  entries_index_path(year: @year, week: week[:week_num])
-                ) 
-              %>
-            </td>
-            <td><%= week[:week_start].strftime('%-d %B') %></td>
-            <td><%= (week[:week_start] + 6.days).strftime('%-d %B') %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    There are no entries this year.
-  <% end %>
-</p>
+
+<% if @weeks.length > 0 %>
+  <ol class="week-list">
+    <% @weeks.each do |week| %>
+      <li class="week-list__el">
+        <%= 
+          link_to(
+            "Week #{week[:week_num]}, #{week[:week_start].strftime('%-d %B')}"\
+            " － #{(week[:week_start] + 6.days).strftime('%-d %B')}",
+            entries_index_path(year: @year, week: week[:week_num])
+          )
+        %>
+      </li>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-state">There are no charts this year.</p>
+<% end %>
+
+
+<%= link_to '+', new_entry_path, class: 'create-button' %>

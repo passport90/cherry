@@ -128,6 +128,27 @@ ul.song-list > li {
     line-height: 2em;
 }
 
+a.create-button {
+    display: block;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+    width: 2em;
+    height: 2em;
+    border-radius: 2em;
+    background-color: #c44536;
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    line-height: 1.95em;
+    box-shadow: 2px 2px 5px 0 gray;
+}
+
+a.create-button:hover {
+    text-decoration: none;
+    background-color: #d55647;
+}
+
 /* Home */
 h1.home-name {
     font-size: 6em;
@@ -221,4 +242,16 @@ h1.home-name {
 
 .menu-nav > a {
     line-height: 4em;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+    display: flex;
+    flex-direction: row;
+    height: 1.5em;
+    margin: 0 1em;
+}
+
+.breadcrumb__el {
+    margin: 0 0.5em;
 }
