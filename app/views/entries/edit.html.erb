@@ -1,36 +1,52 @@
-<h1>Update Entries of <%= "Week #{@week}, #{@year}" %></h1>
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Charts', years_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= link_to @year, weeks_path(year: @year) %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    <%= link_to "Week #{@week}", entries_index_path(year: @year, week: @week) %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    Edit
+  </div>
+</div>
 
-<%=
-  form_with(
-    url: update_entries_path(year: @year, week: @week), method: :put
-  ) do 
-%>
-  <table class="entries-form">
-    <tbody>
+<h1>Update Entries</h1>
+
+<div class="form">
+  <%= 
+    form_with(
+      url: update_entries_path(year: @year, week: @week), method: :put
+    ) do 
+  %>
+    <ol class="entries-form">
       <% (1..10).each do |position| %>
-        <tr>
-          <td class="positions">
-            <%= label_tag "entries_position_#{position}", "#{position}." %>
-          </td>
-          <td>
-            <%= 
-              select_tag(
-                "entries[songs][#{position}]",
-                options_from_collection_for_select(
-                  Song.order(:title).all, :id, :display_entry_option,
-                  @entries[position - 1].song_id
-                )
+        <li class="entries-form__el">
+          <%= 
+            select_tag(
+              "entries[songs][#{position}]",
+              options_from_collection_for_select(
+                Song.order(:title).all, :id, :display_entry_option,
+                @entries[position - 1].song_id
               )
-            %>
-          </td>
-        </tr>
+            )
+          %>
+        </li>
       <% end %>
-    </tbody>
-  </table>
-  <p><%= submit_tag 'Update' %></p>
-<% end %>
-
-<p>
-  <span class="symbol">❌</span>
-  <%= link_to 'Cancel', entries_index_path(year: @year, week: @week) %>
-</p>
+    </ol>
+    <div class="form__el--submit">
+      <%= submit_tag 'Update' %>
+    </div>
+  <% end %>
+</div>

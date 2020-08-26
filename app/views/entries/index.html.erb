@@ -1,25 +1,27 @@
-<div class="chart-container">
-  <h1>Chart</h1>
-  <div class="chart-dates">
-    <div class="chart-week">Week <%= @week %>, <%= @year %></div>
-    <div>
-      <%= @week_start.strftime('%-d %B %Y') %> －
-      <%= @week_end.strftime('%-d %B %Y') %>
-    </div>
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Charts', years_path%>
   </div>
-  <div class="chart-navigation">
-    <div>
-      <span class="symbol">➕</span> <%= link_to 'Create New', new_entry_path %>
-    </div>
+  <div class="breadcrumb__sep">
+    >
   </div>
-  <div class="chart-navigation">
-    <div>
-      <span class="symbol">🏠</span> <%= link_to 'Home', root_path %>
-    </div>
-    <div>
-      <span class="symbol">🗓️</span>
-      <%= link_to "This Year", weeks_path(year: @year) %>
-    </div>
+  <div class="breadcrumb__el">
+    <%= link_to @year, weeks_path(year: @year) %>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    Week <%= @week %>
+  </div>
+</div>
+
+<h1>Chart</h1>
+<div class="center-wrapper">
+  <div class="chart-week">Week <%= @week %>, <%= @year %></div>
+  <div>
+    <%= @week_start.strftime('%-d %B %Y') %> －
+    <%= @week_end.strftime('%-d %B %Y') %>
   </div>
   <div class="chart-navigation">
     <div>
@@ -103,43 +105,73 @@
       </li>
     <% end %>
   </ol>
+
   <% unless @dropped_entries.empty? %>
-    <h5>Dropped Previous Entries</h5>
-    <table class="dropped-entries">
-      <thead>
-        <tr>
-          <th class="dropped-position">#</th>
-          <th>Title</th>
-          <th>Artist</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @dropped_entries.each do |entry| %>
-          <tr>
-            <td class="dropped-position"><%= entry.position %></td>
-            <td>
-              <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
-            </td>
-            <td><%= raw(display_song_artist_with_link(entry.song)) %></td>
-            <td>
-              <%=
+    <div class="dropped-entries-title">Dropped Previous Entries</div>
+    <ol class="chart">
+      <% @dropped_entries.each do |entry| %>
+        <li class="entry">
+          <div class="positional">
+            <div class="position"><%= entry.position %></div>
+            <div class="state">
+              <%= 
                 tag.span(
-                  entry.song.display_rating,
-                  class: "rating #{entry.song.rating_color}"
+                  entry.state[:symbol],
+                  class: "state-symbol #{entry.state[:color]}"
                 )
               %>
-              <% if entry.song.display_symbol? %>
-                <span class="symbol">
-                  <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
-                </span>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+              <span class="difference"><%= entry.difference_display %></span>
+            </div>
+          </div>
+          <div class="entry-artwork-container">
+            <%= 
+              image_tag("/images/songs/#{entry.song.id}.jpg", class: 'entry-artwork')
+            %>
+          </div>
+          <div class="entry-song">
+            <div class="song-title">
+              <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
+            </div>
+            <div class="song-artist">
+              <%= raw(display_song_artist_with_link(entry.song)) %>
+            </div>
+          </div>
+          <div class="rating-container">
+            <%=
+              tag.span(
+                entry.song.display_rating,
+                class: "rating #{entry.song.rating_color}"
+              )
+            %>
+            <% if entry.song.display_symbol? %>
+              <span class="symbol">
+                <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
+              </span>
+            <% end %>
+          </div>
+          <div class="links">
+            <% if entry.song.stream_link.present? %>
+              <%=
+                link_to(
+                  '️🎧', entry.song.stream_link, rel: 'external', target: '_blank',
+                  class: 'symbol', title: 'Stream'
+                )
+              %>
+            <% end %>
+            <% if entry.song.video_link.present? %>
+              <%=
+                link_to(
+                  '📺', entry.song.video_link, rel: 'external', target: '_blank',
+                  class: 'symbol', title: 'Video'
+                )
+              %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
   <% end %>
   <p>
-  </p>
 </div>
+
+<%= link_to '+', new_entry_path, class: 'create-button' %>

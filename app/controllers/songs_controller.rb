@@ -15,7 +15,12 @@ class SongsController < ApplicationController
   end
 
   def index
-    @songs = Song.order_by_median_desc.all
+    items_per_page = 30
+    @page = params.fetch(:page, 0).to_i
+    @page_count = (Song.count.to_f / items_per_page).ceil
+    @songs = Song.order_by_median_desc
+                 .offset(@page * items_per_page).limit(items_per_page)
+                 .all
   end
 
   def new

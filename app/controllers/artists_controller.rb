@@ -9,7 +9,12 @@ class ArtistsController < ApplicationController
   end
 
   def index
-    @artists = Artist.all
+    items_per_page = 60
+    @page = params.fetch(:page, 0).to_i
+    @page_count = (Artist.count.to_f / items_per_page).ceil
+    @artists = Artist.select(:id, :name).order(:name)
+                     .offset(@page * items_per_page).limit(items_per_page)
+                     .all
   end
 
   def new

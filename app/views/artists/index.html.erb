@@ -1,11 +1,35 @@
 <h1>Artists</h1>
 
-<p>
-  <span class="symbol">🏠</span> <%= link_to 'Home', root_path %> <br />
-  <span class="symbol">➕</span> <%= link_to 'Create New', new_artist_path %>
-</p>
-<p>
-  <% @artists.each do |artist| %>
-    <%= link_to artist.name, artist_path(artist) %> <br />
-  <% end %>
-</p>
+<% if @artists.length > 0 %>
+  <div class="long-list-wrapper">
+    <ol class="long-list">
+      <% @artists.each do |artist| %>
+        <li class="long-list__el">
+          <%= 
+            link_to artist.name, artist_path(artist)
+          %>
+        </li>
+      <% end %>
+    </ol>
+    <% if @page_count > 1 %>
+      <div class="page-list-wrapper">
+        <div class="page-list-title">Pages</div>
+        <ol class="page-list">
+          <% @page_count.times do |p| %>
+            <li class="page-list__el">
+              <% if @page != p %>
+                <%= link_to p + 1, artists_path(page: p) %>
+              <% else %>
+                <b><%= p + 1 %></b>
+              <% end %>
+            </li>
+          <% end %>
+        </ol>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="empty-state">There are no artists.</p>
+<% end %>
+
+<%= link_to '+', new_artist_path, class: 'create-button' %>

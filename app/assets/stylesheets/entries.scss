@@ -2,46 +2,28 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-table.entries-form {
-    border: 0
-}
-
-table.entries-form td.positions {
-    text-align: right;
-}
-
-table.entries-form td {
-    border: 0;
-    padding: 0.2em;
-}
-
+/* Index */
 .chart-container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.chart-dates {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 3ex;
-}
-
-.chart-dates > .chart-week {
+.chart-week {
     font-size: 2em;
     font-weight: bold;
 }
 
 .chart-navigation {
     display: flex;
-    flex-flow: row wrap;
     justify-content: center;
     text-align: center;
 }
 
 .chart-navigation > div {
-    margin: auto 1ch;    
+    margin: 0 0.5em; 
+    font-family: "Futura", sans-serif;
+    text-transform: uppercase;
 }
 
 ol.chart {
@@ -49,6 +31,7 @@ ol.chart {
     padding: 0;
     width: 1000px;
     max-width: 100%;
+    margin: 1em;
 }
 
 li.entry {
@@ -147,12 +130,23 @@ div.links {
     font-size: 1.5em;
 }
 
-table.dropped-entries td {
-    line-height: 1.2em;
-    height: 1.2em;
+.dropped-entries-title {
+    margin-top: 2em;
+    font-family: "Futura", sans-serif;
+    text-transform: uppercase;
 }
 
-th.dropped-position,
-td.dropped-position {
-    text-align: right;
+/* Form */
+ol.entries-form {
+    list-style-type: decimal;
+    padding-left: 1.5em;
+    font-family: "Futura", sans-serif;
+}
+
+ol.entries-form > li {
+    margin: 0.5em 0;
+}
+
+ol.entries-form > li > select {
+    width: 100%;
 }

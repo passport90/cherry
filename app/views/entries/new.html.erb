@@ -1,38 +1,43 @@
+<div class="breadcrumb">
+  <div class="breadcrumb__el">
+    <%= link_to 'Charts', years_path%>
+  </div>
+  <div class="breadcrumb__sep">
+    >
+  </div>
+  <div class="breadcrumb__el">
+    New Entries
+  </div>
+</div>
+
 <h1>New Entries</h1>
 
-<%= form_with url: entries_path, method: :post do %>
-  <p>
-    <%= label_tag 'entries_year', 'Year' %> <br />
-    <%= number_field_tag 'entries[year]' %>
-  </p>
-  <p>
-    <%= label_tag 'entries_week', 'Week' %> <br />
-    <%= number_field_tag 'entries[week]' %>
-  </p>
-  <table class="entries-form">
-    <tbody>
+<div class="form">
+  <%= form_with url: entries_path, method: :post do %>
+    <div class="form__el">
+      <%= label_tag 'entries_year', 'Year' %>
+      <%= number_field_tag 'entries[year]' %>
+    </div>
+    <div class="form__el">
+      <%= label_tag 'entries_week', 'Week' %>
+      <%= number_field_tag 'entries[week]' %>
+    </div>
+    <ol class="entries-form">
       <% (1..10).each do |position| %>
-        <tr>
-          <td class="positions">
-            <%= label_tag "entries_position_#{position}", "#{position}." %>
-          </td>
-          <td>
-            <%= 
-              select_tag(
-                "entries[songs][#{position}]",
-                options_from_collection_for_select(
-                  Song.order(:title).all, :id, :display_entry_option
-                )
-              )
-            %>
-          </td>
-        </tr>
+        <li class="entries-form__el">
+          <%= 
+            select_tag(
+              "entries[songs][#{position}]",
+              options_from_collection_for_select(
+                Song.order(:title).all, :id, :display_entry_option
+              ), {include_blank: true}
+            )
+          %>
+        </li>
       <% end %>
-    </tbody>
-  </table>
-  <p><%= submit_tag 'Create' %></p>
-<% end %>
-
-<p>
-  <span class="symbol">❌</span> <%= link_to 'Cancel', years_path %>
-</p>
+    </ol>
+    <div class="form__el--submit">
+      <%= submit_tag 'Create' %>
+    </div>
+  <% end %>
+</div>
