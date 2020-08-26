@@ -16,6 +16,7 @@
   </head>
 
   <body>
+    <%= render 'application/menu' unless @disable_nav %>
     <%= yield %>
   </body>
 </html>

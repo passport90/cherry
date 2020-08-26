@@ -14,7 +14,15 @@
  *= require_self
  */
 * {
+    box-sizing: border-box;
+}
+
+p {
     font-family: "Helvetica Neue", sans-serif;
+}
+  
+body {
+    margin: 0
 }
 
 a {
@@ -26,17 +34,20 @@ a:hover {
     text-decoration: underline;
 }
 
-div {
-    box-sizing: border-box;
-}
 
 h1 {
-    font-size: 3.5em;
-    font-weight: 100;
+    font-family: "Futura", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.5ch;
+    text-align: center;
+    font-size: 4em;
+    font-weight: normal;
+    margin-right: 1em;
+    margin-left: 1em;
 }
 
 
-ul {
+ul, ol {
     list-style-type: none;
     padding: 0;
 }
@@ -115,4 +126,99 @@ span.rating {
 ul.song-list > li {
     height: 2em;
     line-height: 2em;
+}
+
+/* Home */
+h1.home-name {
+    font-size: 6em;
+}
+
+.home-nav-wrapper {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 12.5%;
+    flex-wrap: wrap;
+}
+
+.home-nav {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5em 4.15%;
+}
+
+.icon {
+    font-size: 4em;
+    text-align: center;
+}
+
+.icon--big {
+    font-size: 6em;
+    text-align: center;
+}
+
+.icon--small {
+    font-size: 2em;
+    text-align: center;
+}
+
+.icon-text {
+    font-family: "Futura";
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.icon-text--small {
+    font-family: "Futura";
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 0.75em;
+}
+
+/* Menu */
+.menu-wrapper {
+    font-family: "Futura", sans-serif;
+    display: flex;
+    flex-direction: row;
+    height: 4em;
+    width: 100%;
+    border-bottom: solid 1px #2C365E;
+    margin-bottom: 1em;
+    padding: 0 5%;
+}
+
+.menu-name {
+    width: 20%;
+}
+
+.menu-name > a {
+    letter-spacing: 0.2ch;
+    text-transform: uppercase;
+    font-size: 2em;
+    color: black;
+    line-height: 2em;
+}
+
+.menu-name > a:hover {
+    text-decoration: none;
+}
+
+.menu-nav-wrapper {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 80%;
+}
+
+.menu-nav {
+    font-family: "Futura", sans-serif;
+    width: 10%;
+    margin-left: 2%;
+    text-align: right;
+}
+
+.menu-nav > a {
+    line-height: 4em;
 }

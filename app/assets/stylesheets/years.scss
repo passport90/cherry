@@ -1,0 +1,21 @@
+// Place all the styles related to the years controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+
+.year-list {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    margin: 0 10%;
+    flex-wrap: wrap;
+}
+
+.year-list__el {
+    font-family: "Futura", sans-serif;
+    text-transform: uppercase;
+    width: 10%;
+    margin: 1.5em 7.5%;
+    text-align: center;
+    font-size: 2.5em;
+}
