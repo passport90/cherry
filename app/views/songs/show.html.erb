@@ -49,8 +49,8 @@
     </ul>
   <% end %>
   <% if @entrance.present? %>
-    <ul class="icon-list">
-      <li class="icon-list__el">
+    <ul class="icon-list song-date-list">
+      <li class="icon-list__el song-date">
         <%
           start_link = entries_index_path(
             year: @entrance.year, week: @entrance.week
@@ -73,7 +73,7 @@
             @song.stat_date.median_year.present? and
             @song.stat_date.median_week.present?)
       %>
-        <li class="icon-list__el">
+        <li class="icon-list__el song-date" >
           <%
             median_link = entries_index_path(
               year: @song.stat_date.median_year, 
@@ -91,7 +91,7 @@
           </div>
         </li>
       <% end %>
-      <li class="icon-list__el">
+      <li class="icon-list__el song-date">
         <%
           ending_link = entries_index_path(year: @exit.year, week: @exit.week)
         %>
@@ -108,37 +108,15 @@
     </ul>
   <% end %>
 
-  <% if @song.stream_link.present? and @song.video_link.present? %>
-    <ul class="icon-list">
-      <% if @song.stream_link.present? %>
-        <li class="icon-list__el">
-          <%= 
-            link_to(
-              '🎧', @song.stream_link,
-              class: 'icon symbol block-link',
-              rel: 'external', target: '_blank'
-            )
-          %>
-          <div class="icon-text">
-            <%= link_to 'Stream', @song.stream_link %>
-          </div>
-        </li>
-      <% end %>
-      <% if @song.video_link.present? %>
-        <li class="icon-list__el">
-          <%= 
-            link_to(
-              '📺', @song.video_link,
-              class: 'icon symbol block-link',
-              rel: 'external', target: '_blank'
-            )
-          %>
-          <div class="icon-text">
-            <%= link_to 'Video', @song.video_link %>
-          </div>
-        </li>
-      <% end %>
-    </ul>
+  <% if @song.stream_link.present? %>
+    <div class="song-embed">
+      <%= raw @song.stream_link %>
+    </div>
+  <% end %>
+  <% if @song.video_link.present? %>
+    <div class="song-embed">
+      <%= raw @song.video_link %>
+    </div>
   <% end %>
 
   <ul class="action-list">
@@ -150,13 +128,9 @@
         )
       %>
       <div class="icon-text--small">
-        <%= link_to "Edit", edit_song_path(@song) %>
+        <%= link_to 'Edit', edit_song_path(@song) %>
       </div>
     </li>
   </ul>
-
-
 </div>
-
-
 <%= link_to '+', new_song_path, class: 'create-button' %>

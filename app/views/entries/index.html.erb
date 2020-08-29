@@ -65,7 +65,9 @@
         </div>
         <div class="entry-song">
           <div class="song-title">
-            <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
+            <%= link_to("\"#{entry.song.title}\"", song_path(entry.song),
+                        target: '_blank')
+            %>
           </div>
           <div class="song-artist">
             <%= raw(display_song_artist_with_link(entry.song)) %>
@@ -84,24 +86,6 @@
             </span>
           <% end %>
         </div>
-        <div class="links">
-          <% if entry.song.stream_link.present? %>
-            <%=
-              link_to(
-                '️🎧', entry.song.stream_link, rel: 'external', target: '_blank',
-                class: 'symbol', title: 'Stream'
-              )
-            %>
-          <% end %>
-          <% if entry.song.video_link.present? %>
-            <%=
-              link_to(
-                '📺', entry.song.video_link, rel: 'external', target: '_blank',
-                class: 'symbol', title: 'Video'
-              )
-            %>
-          <% end %>
-        </div>
       </li>
     <% end %>
   </ol>
@@ -113,15 +97,6 @@
         <li class="entry">
           <div class="positional">
             <div class="position"><%= entry.position %></div>
-            <div class="state">
-              <%= 
-                tag.span(
-                  entry.state[:symbol],
-                  class: "state-symbol #{entry.state[:color]}"
-                )
-              %>
-              <span class="difference"><%= entry.difference_display %></span>
-            </div>
           </div>
           <div class="entry-artwork-container">
             <%= 
@@ -130,7 +105,9 @@
           </div>
           <div class="entry-song">
             <div class="song-title">
-              <%= link_to "\"#{entry.song.title}\"", song_path(entry.song) %>
+              <%= link_to("\"#{entry.song.title}\"", song_path(entry.song),
+                          target: '_blank')
+              %>
             </div>
             <div class="song-artist">
               <%= raw(display_song_artist_with_link(entry.song)) %>
@@ -147,24 +124,6 @@
               <span class="symbol">
                 <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
               </span>
-            <% end %>
-          </div>
-          <div class="links">
-            <% if entry.song.stream_link.present? %>
-              <%=
-                link_to(
-                  '️🎧', entry.song.stream_link, rel: 'external', target: '_blank',
-                  class: 'symbol', title: 'Stream'
-                )
-              %>
-            <% end %>
-            <% if entry.song.video_link.present? %>
-              <%=
-                link_to(
-                  '📺', entry.song.video_link, rel: 'external', target: '_blank',
-                  class: 'symbol', title: 'Video'
-                )
-              %>
             <% end %>
           </div>
         </li>
