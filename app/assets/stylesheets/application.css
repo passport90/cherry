@@ -338,6 +338,7 @@ h1.home-name {
 {
     width: 100%;
     height: 4ch;
+    font-family: 'Menlo', monospace;
 }
 
 .form__el > select[multiple="multiple"] {

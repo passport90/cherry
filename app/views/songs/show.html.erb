@@ -113,9 +113,17 @@
       <%= raw @song.stream_link %>
     </div>
   <% end %>
-  <% if @song.video_link.present? %>
+  <% if @song.video_youtube_id.present? %>
     <div class="song-embed">
-      <%= raw @song.video_link %>
+      <% 
+        embed = '<iframe width="560" height="315" '\
+                'src="https://www.youtube.com/embed/'\
+                "#{@song.video_youtube_id}\" frameborder=\"0\" "\
+                'allow="accelerometer; autoplay; encrypted-media; gyroscope; '\
+                'picture-in-picture" allowfullscreen></iframe>'
+      
+      %>
+      <%= raw embed %>
     </div>
   <% end %>
 

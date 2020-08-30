@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_050202) do
+ActiveRecord::Schema.define(version: 2020_08_30_004242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_08_23_050202) do
     t.decimal "rating"
     t.integer "fondness", default: 0, null: false
     t.boolean "is_acclaimed", default: false, null: false
+    t.string "video_youtube_id"
   end
 
   create_table "stat_dates", force: :cascade do |t|

@@ -16,6 +16,8 @@ class Song < ApplicationRecord
                                '"stat_dates"."median_week" DESC, '\
                                '"songs"."title"')
   end
+  
+  nilify_blanks
 
   def display
     "\"#{title}\" - #{artists.pluck(:name).to_sentence}"
