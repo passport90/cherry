@@ -54,7 +54,8 @@ private
   def song_params
     params.require(:song)
           .permit(
-            :title, :fondness, :stream_link, :video_link, :rating, :is_acclaimed
+            :title, :fondness, :stream_apple_music_id, :video_youtube_id,
+            :rating, :is_acclaimed
           )
   end
 end

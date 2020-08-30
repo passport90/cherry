@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_30_004242) do
+ActiveRecord::Schema.define(version: 2020_08_30_005738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +48,13 @@ ActiveRecord::Schema.define(version: 2020_08_30_004242) do
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "stream_link"
-    t.string "video_link"
     t.decimal "rating"
     t.integer "fondness", default: 0, null: false
     t.boolean "is_acclaimed", default: false, null: false
     t.string "video_youtube_id"
+    t.string "stream_apple_music_id"
+    t.string "stream_link"
+    t.string "video_link"
   end
 
   create_table "stat_dates", force: :cascade do |t|
