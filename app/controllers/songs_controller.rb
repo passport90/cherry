@@ -1,5 +1,19 @@
 class SongsController < ApplicationController
   def create
+    # Helper for links
+    if params[:song][:stream_apple_music_id].start_with?('https://')
+      match = params[:song][:stream_apple_music_id].match(
+        /\/id\/album\/.+\/(.+)$/
+      )
+      params[:song][:stream_apple_music_id] = match[1]
+    end
+    if params[:song][:video_youtube_id].start_with?('https://')
+      youtube_prefix_len = 'https://www.youtube.com/watch?v='.size
+      params[:song][:video_youtube_id] = (
+        params[:song][:video_youtube_id][youtube_prefix_len..-1]
+      )
+    end
+
     ActiveRecord::Base.transaction do
       @song = Song.create!(song_params)
       if params[:song][:artist_id].blank?
@@ -38,6 +52,20 @@ class SongsController < ApplicationController
   end
 
   def update
+    # Helper for links
+    if params[:song][:stream_apple_music_id].start_with?('https://')
+      match = params[:song][:stream_apple_music_id].match(
+        /\/id\/album\/.+\/(.+)$/
+      )
+      params[:song][:stream_apple_music_id] = match[1]
+    end
+    if params[:song][:video_youtube_id].start_with?('https://')
+      youtube_prefix_len = 'https://www.youtube.com/watch?v='.size
+      params[:song][:video_youtube_id] = (
+        params[:song][:video_youtube_id][youtube_prefix_len..-1]
+      )
+    end
+
     ActiveRecord::Base.transaction do
       @song = Song.find(params[:id])
       @song.update!(song_params)
