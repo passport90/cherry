@@ -55,7 +55,7 @@ class Entry < ApplicationRecord
     if year == previous_entry.year
       week - previous_entry.week > 1
     elsif week == 1
-      week_start - previous_entry.week_start > 1.week
+      week_start - previous_entry.week_start > 7
     else
       true
     end
