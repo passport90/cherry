@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_30_012113) do
+ActiveRecord::Schema.define(version: 2020_08_30_140043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2020_08_30_012113) do
     t.integer "median_week"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "point"
     t.index ["median_year", "median_week"], name: "index_stat_dates_on_median_year_and_median_week"
     t.index ["song_id"], name: "index_stat_dates_on_song_id", unique: true
   end
