@@ -29,7 +29,9 @@
             select_tag(
               "entries[songs][#{position}]",
               options_from_collection_for_select(
-                Song.order(:title).all, :id, :display_entry_option
+                Song.order(created_at: :desc).limit(100).all.sort_by(&:title),
+                # Song.order(:title).all,
+                :id, :display_entry_option
               ), {include_blank: true}
             )
           %>
