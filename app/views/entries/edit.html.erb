@@ -37,7 +37,15 @@
             select_tag(
               "entries[songs][#{position}]",
               options_from_collection_for_select(
-                Song.order(:title).all, :id, :display_entry_option,
+                Song.includes(:stat_date)
+                    .where(
+                      {stat_dates: {
+                        median_year: ENV.fetch('ENTRY_MEDIAN', '1970')
+                      }
+                    ).or(
+                      Song.includes(:stat_date)
+                          .where(stat_dates: {median_year: nil})
+                    ).order(:title),
                 @entries[position - 1].song_id
               )
             )
