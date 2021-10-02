@@ -66,10 +66,10 @@ class SongsController < ApplicationController
       params[:song][:stream_apple_music_id] = match[1]
     end
     if params[:song][:stream_spotify_id].start_with?('https://')
-      spotify_prefix_len = 'https://open.spotify.com/track/'.size
-      params[:song][:stream_spotify_id] = (
-        params[:song][:stream_spotify_id][spotify_prefix_len..-1]
+      match = params[:song][:stream_spotify_id].match(
+        /\/open.spotify.com\/track\/(.+)\?/
       )
+      params[:song][:stream_spotify_id] = match[1]
     end
     if params[:song][:video_youtube_id].start_with?('https://')
       youtube_prefix_len = 'https://www.youtube.com/watch?v='.size
