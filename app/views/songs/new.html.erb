@@ -28,24 +28,12 @@
       %>
     </div>
     <div class="form__el">
-      <%= f.label :fondness, 'Fondness' %>
-      <%= f.number_field :fondness %>
-    </div>
-    <div class="form__el">
-      <%= f.label :stream_apple_music_id, 'Apple Music ID' %>
-      <%= f.text_field :stream_apple_music_id %>
+      <%= f.label :stream_spotify_id, 'Spotify ID' %>
+      <%= f.text_field :stream_spotify_id %>
     </div>
     <div class="form__el">
       <%= f.label :video_youtube_id, 'YouTube ID' %>
       <%= f.text_field :video_youtube_id %>
-    </div>
-    <div class="form__el">
-      <%= f.label :rating, 'Rating' %>
-      <%= f.text_field :rating, class: 'rating' %>
-    </div>
-    <div class="form__el">
-      <%= f.check_box :is_acclaimed %>
-      <%= f.label :is_acclaimed, 'Acclaimed' %>
     </div>
     <div class="form__el--submit"><%= f.submit 'Create' %></div>
   <% end %>

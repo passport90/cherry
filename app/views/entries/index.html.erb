@@ -73,19 +73,6 @@
             <%= raw(display_song_artist_with_link(entry.song)) %>
           </div>
         </div>
-        <div class="rating-container">
-          <%=
-            tag.span(
-              entry.song.display_rating,
-              class: "rating #{entry.song.rating_color}"
-            )
-          %>
-          <% if entry.song.display_symbol? %>
-            <span class="symbol">
-              <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
-            </span>
-          <% end %>
-        </div>
       </li>
     <% end %>
   </ol>
@@ -112,19 +99,6 @@
             <div class="song-artist">
               <%= raw(display_song_artist_with_link(entry.song)) %>
             </div>
-          </div>
-          <div class="rating-container">
-            <%=
-              tag.span(
-                entry.song.display_rating,
-                class: "rating #{entry.song.rating_color}"
-              )
-            %>
-            <% if entry.song.display_symbol? %>
-              <span class="symbol">
-                <% if entry.song.is_acclaimed %>💎<% end %><%= entry.song.display_fondness %>
-              </span>
-            <% end %>
           </div>
         </li>
       <% end %>

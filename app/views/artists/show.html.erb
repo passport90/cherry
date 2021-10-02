@@ -18,12 +18,13 @@
     <ol class="song-list">
       <% @songs.each do |song| %>
         <li class="song-list__el">
-          <%= link_to "\"#{song.title}\"", song_path(song) %>
-          <%= tag.span song.display_rating, class: "rating #{song.rating_color}" %>
-          <% if song.display_symbol? %>
-            <span class="symbol">
-              <% if song.is_acclaimed %>💎<% end %><%= song.display_fondness %>
-            </span>
+          <%= link_to("\"#{song.title}\"", song_path(song), target: '_blank') %>
+          <% 
+            if (song.stat_date.present? and
+                song.stat_date.median_year.present? and
+                song.stat_date.median_week.present?)
+          %>— 
+            <%= song.median_date.strftime('%-d %B %Y') %>
           <% end %>
         </li>
       <% end %>

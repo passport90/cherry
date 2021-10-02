@@ -6,14 +6,14 @@
       <% @songs.each do |song| %>
         <li class="song-list__el">
           <%= 
-            link_to song.display, song_path(song)
+            link_to(song.display, song_path(song), target: '_blank')
           %>
-          <%=
-            tag.span song.display_rating, class: "rating #{song.rating_color}"
-          %>
-          <% if song.is_acclaimed %><span class="symbol">💎</span><% end %>
-          <% if song.fondness != 0 %>
-            <span class="symbol"><%= song.display_fondness %></span>
+          <% 
+            if (song.stat_date.present? and
+                song.stat_date.median_year.present? and
+                song.stat_date.median_week.present?)
+          %>— 
+            <%= song.median_date.strftime('%-d %B %Y') %>
           <% end %>
         </li>
       <% end %>

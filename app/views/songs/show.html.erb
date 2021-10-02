@@ -20,15 +20,6 @@
     <%= raw(display_song_artist_with_link(@song)) %>
   </div>
 
-  <div class="song-rating">
-    <%= tag.span @song.display_rating, class: "rating #{@song.rating_color}" %>
-    <% if @song.display_symbol? %>
-      <span class="symbol">
-        <% if @song.is_acclaimed %>💎<% end %><%= @song.display_fondness %>
-      </span>
-    <% end %>
-  </div>
-
   <% if @entrance.present? %>
     <ul class="icon-list">
       <li class="icon-list__el">
@@ -108,7 +99,7 @@
     </ul>
   <% end %>
 
-  <% if @song.stream_apple_music_id.present? %>
+  <% if false && @song.stream_apple_music_id.present? %>
     <div class="song-embed">
       <% 
         embed = '<iframe allow="autoplay *; encrypted-media *;" '\
@@ -120,6 +111,18 @@
                 'allow-top-navigation-by-user-activation" '\
                 'src="https://embed.music.apple.com/id/album/'\
                 "#{@song.stream_apple_music_id}\"></iframe>"
+      %>
+      <%= raw embed %>
+    </div>
+  <% end %>
+  <% if @song.stream_spotify_id.present? %>
+    <div class="song-embed">
+      <% 
+        embed = '<iframe src="https://open.spotify.com/embed/track/'\
+                "#{@song.stream_spotify_id}\" width=\"100%\" height=\"80\" "\
+                'frameBorder="0" allowfullscreen="" allow="autoplay; '\
+                'clipboard-write; encrypted-media; fullscreen; '\
+                'picture-in-picture"></iframe>'
       %>
       <%= raw embed %>
     </div>
